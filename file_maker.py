@@ -292,6 +292,16 @@ class button_action:
                 return 0
             else: options['D'] = self.option_D.text
 
+            self.option_A.hint_text_color = (1,1,1,0.9)
+            self.option_B.hint_text_color = (1,1,1,0.9)
+            self.option_C.hint_text_color = (1,1,1,0.9)
+            self.option_D.hint_text_color = (1,1,1,0.9)
+
+            self.option_A.hint_text = "Option 'A'"
+            self.option_B.hint_text = "Option 'B'"
+            self.option_C.hint_text = "Option 'C'"
+            self.option_D.hint_text = "Option 'D'"
+
             #answer
             if len(answer.replace(" ","")) == 0:
                 self.answer_label.color = (0.6,0.1,0.1,0.6)
