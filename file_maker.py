@@ -292,10 +292,11 @@ class button_action:
                 return 0
             else: options['D'] = self.option_D.text
 
-            self.option_A.hint_text_color = (1,1,1,0.9)
-            self.option_B.hint_text_color = (1,1,1,0.9)
-            self.option_C.hint_text_color = (1,1,1,0.9)
-            self.option_D.hint_text_color = (1,1,1,0.9)
+            self.option_A.hint_text_color = (0.3,0.3,0.3,0.9)
+            self.option_B.hint_text_color = (0.3,0.3,0.3,0.9)
+            self.option_C.hint_text_color = (0.3,0.3,0.3,0.9)
+            self.option_D.hint_text_color = (0.3,0.3,0.3,0.9)
+            self.question.hint_text_color = (0.3,0.3,0.3,0.9)
 
             self.option_A.hint_text = "Option 'A'"
             self.option_B.hint_text = "Option 'B'"
