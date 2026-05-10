@@ -1,5 +1,9 @@
+#font change
+
+from kivy.core.text import LabelBase,DEFAULT_FONT
+LabelBase.register(DEFAULT_FONT,"DejaVuSans.ttf")
+
 #kivy files
-import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -23,8 +27,7 @@ Q1:{"question": "what is your name?",
 "answer":A}
 '''
 
-#>>>>>>>>>>>>>>>>>>>>>> variables >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+#>>>>>>>>>>>>>>>>>>>>>> variables >>>>>>>>>>>>>>>>>>>>>>
 font_size = sp(15)
 size = (0.3,0.6)
 
@@ -90,7 +93,7 @@ def file_write():
     pickle.dump(data,file)
 
 try: config_load()
-except: print("file error")
+except: pass
 
 #path fix
 if len(path.replace(" ","")) < 1:

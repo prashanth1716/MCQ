@@ -1,4 +1,8 @@
-import kivy
+#font change
+from kivy.core.text import LabelBase,DEFAULT_FONT
+LabelBase.register(DEFAULT_FONT,"DejaVuSans.ttf")
+
+#modules
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -12,7 +16,7 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.utils import platform
 
-import json,pickle,base64,os,datetime,subprocess
+import json,pickle,base64,os,datetime,subprocess,random
 
 #variables
 question = "what are you doing?"
@@ -27,6 +31,33 @@ path = "/"
 score = 0
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>> files read or update >>>>>>>>>>>>>>>>>>>>>>>
+
+#options changer
+def rand_picker(data):
+    #varables
+    question = data["question"]
+    old_ans = data["options"][data["answer"]]
+    options = data["options"]
+    options_vals = list(options.values())
+    new_ans = ""
+    updated_data = {}
+
+    #options update
+    random.shuffle(options_vals)
+    options_update = dict(zip(options.keys(),options_vals))
+    
+    #check new answer
+    if options_update["A"] == old_ans: new_ans = "A"
+    elif options_update["B"] == old_ans: new_ans = "B"
+    elif options_update["C"] == old_ans: new_ans = "C"
+    elif options_update["D"] == old_ans: new_ans = "D"
+
+    #add to new dict
+    updated_data["question"] = question
+    updated_data["options"] = options_update
+    updated_data["answer"] = new_ans
+
+    return updated_data
 
 #file read
 def file_read():
@@ -78,12 +109,14 @@ def data_load():
     if q_num <= 0: q_num = 1
     if q_num > all_num_of_question: q_num = all_num_of_question
 
-    question = data[f"Q{q_num}"]["question"]
-    options["A"] = data[f"Q{q_num}"]["options"]["A"]
-    options["B"] = data[f"Q{q_num}"]["options"]["B"]
-    options["C"] = data[f"Q{q_num}"]["options"]["C"]
-    options["D"] = data[f"Q{q_num}"]["options"]["D"]
-    answer = data[f"Q{q_num}"]["answer"]
+    update_data = rand_picker(data[f"Q{q_num}"])
+
+    question = update_data["question"]
+    options["A"] = update_data["options"]["A"]
+    options["B"] = update_data["options"]["B"]
+    options["C"] = update_data["options"]["C"]
+    options["D"] = update_data["options"]["D"]
+    answer = update_data["answer"]
 
 #history
 def history_save():
