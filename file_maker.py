@@ -314,6 +314,8 @@ class button_action:
             file_write()
             mcq_num = mcq_num + 1
             self.question_number.text = f"Q{mcq_num}"
+            as_name = path[path.rfind("/")+1:]
+            self.path_label.text = as_name[:path.rfind(".")]
 
             self.question.text = ""
             self.option_A.text = ""
@@ -565,6 +567,11 @@ class home_page(BoxLayout,button_action):
             size_hint = size
         )
         option_layout.add_widget(self.option_D)
+
+        #if file exict
+        if os.path.isfile(path=path):
+            as_name = path[path.rfind("/")+1:]
+            self.path_label.text = as_name[:path.rfind(".")]
 
 
         #add to layout
