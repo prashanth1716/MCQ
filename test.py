@@ -30,6 +30,8 @@ data = {}
 path = "/"
 score = 0
 
+text_size = (300,None)
+
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>> files read or update >>>>>>>>>>>>>>>>>>>>>>>
 
 #options changer
@@ -72,10 +74,14 @@ def file_read():
     except EOFError:
         warn = Popup(
                 title="file error",
-                    content=Label(text="file empty"),
-                    size_hint = (0.7,0.3)
+                    content=Label(text="file empty", 
+                                  text_size=text_size, 
+                                  halign="left",
+                                  valign="middle",
+                                  size_hint = (0.7,0.3)
+        ).bind(size=lambda s, *_: setattr(s, 'text_size', (s.width,None)),
+               texture_size = lambda s,size: setattr(s, 'height',size[1]))
         )
-
         warn.open()
 
 #config load
@@ -238,11 +244,18 @@ class btn:
                 footer = BoxLayout()
 
                 #head
-                head.add_widget(Label(text="subject: ", color=(0.7,0.1,0.7,1)))
+                head.add_widget(Label(text="subject: ", 
+                                      color=(0.7,0.1,0.7,1),
+                                      ))
                 head.add_widget(Label(text= subject))
 
                 head.add_widget(Label(text= "no.of questions:", color=(0.7,0.1,0.7,1)))
-                head.add_widget(Label(text= str(all_num_of_question)))
+                head.add_widget(Label(text= str(all_num_of_question),
+                                      text_size=text_size, 
+                                      halign="center",
+                                      valign="middle")
+                                      ).bind(size=lambda s, *_: setattr(s, 'text_size', (s.width,None)),
+                                              texture_size = lambda s,size: setattr(s, 'height',size[1]))
 
                 head.add_widget(Label(text="correct:", color=(0.7,0.1,0.7,0.8)))
                 head.add_widget(Label(text= str(score)))
@@ -588,23 +601,47 @@ class home_page(BoxLayout,btn):
         grid.cols = 2
 
         #A
-        self.option_A = Button(text=f"A: {options['A']}")
-        self.option_A.bind(on_press= lambda inst: self.options_btn("A"))
+        self.option_A = Button(text=f"A: {options['A']}",
+                               text_size=text_size, 
+                               halign="center",
+                               valign="middle"
+                               )
+                            
+        self.option_A.bind(on_press= lambda inst: self.options_btn("A"),
+                           size=lambda s, *_: setattr(s, 'text_size', (s.width,None)))
         grid.add_widget(self.option_A)
 
         #B
-        self.option_B = Button(text=f"B: {options['B']}")
-        self.option_B.bind(on_press= lambda inst: self.options_btn("B"))
+        self.option_B = Button(text=f"B: {options['B']}",
+                               text_size=text_size, 
+                               halign="center",
+                               valign="middle"
+                               )
+        
+        self.option_B.bind(on_press= lambda inst: self.options_btn("B"),
+                           size=lambda s, *_: setattr(s, 'text_size', (s.width,None)))
         grid.add_widget(self.option_B)
 
         #C
-        self.option_C = Button(text=f"C: {options['C']}")
-        self.option_C.bind(on_press= lambda inst: self.options_btn("C"))
+        self.option_C = Button(text=f"C: {options['C']}",
+                               text_size=text_size, 
+                               halign="center",
+                               valign="middle"
+                               )
+        
+        self.option_C.bind(on_press= lambda inst: self.options_btn("C"),
+                           size=lambda s, *_: setattr(s, 'text_size', (s.width,None)))
         grid.add_widget(self.option_C)
 
         #D
-        self.option_D = Button(text=f"D: {options['D']}")
-        self.option_D.bind(on_press= lambda inst: self.options_btn("D"))
+        self.option_D = Button(text=f"D: {options['D']}",
+                               text_size=text_size, 
+                               halign="center",
+                               valign="middle"
+                               )
+        
+        self.option_D.bind(on_press= lambda inst: self.options_btn("D"),
+                           size=lambda s, *_: setattr(s, 'text_size', (s.width,None)))
         grid.add_widget(self.option_D)
 
         self.option_A.disabled = True
